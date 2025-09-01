@@ -1,5 +1,5 @@
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import { link } from './components/keys'
 import Result from './components/Result'
@@ -10,20 +10,19 @@ function App() {
    const [Responsive, setResponsive] = useState([])
 
    const [chatHistory,setHistory] = useState(JSON.parse(localStorage.getItem('history')) )
+
+   const[selectHistory, setSelectHistory] = useState('')
   
-  const payload = {
-
-    "contents": [{"parts":[{"text": `${Query}`}]}]  //answer it and also provide isnight into some particular 'Machine learning' topic which is relatable to the query, throughout your answer subtly. also keep in mind it should be some particular topic, but dont write that you've been asked to provide machine learning reference
-  }
-
+  
 
   const askQuery = async()=>{
 
-    if (!Query){
+    if (!Query && !selectHistory){
       return false;
     }
 
-    if (localStorage.getItem('history')) {
+    if(Query){
+      if (localStorage.getItem('history')) {
 
       let history = JSON.parse(localStorage.getItem('history'));
       history = [Query, ...history]
@@ -33,6 +32,20 @@ function App() {
       localStorage.setItem('history', JSON.stringify([Query]))
       setHistory([Query])
     }
+
+    }
+
+    const data = Query?Query:selectHistory
+
+    const payload = {
+
+    "contents": [{"parts":[{"text": `${data}`}]}]  //answer it and also provide isnight into some particular 'Machine learning' topic which is relatable to the query, throughout your answer subtly. also keep in mind it should be some particular topic, but dont write that you've been asked to provide machine learning reference
+  }
+
+
+
+
+    
 
     
     let res = await fetch(link, {
@@ -50,7 +63,7 @@ function App() {
     dataString = dataString.map((item)=>item.trim())
     
     console.log(dataString)
-     setResponsive([...Responsive, {type: 'q', text: Query}, {type:'a', text: dataString}])
+     setResponsive([...Responsive, {type: 'q', text: Query?Query:selectHistory}, {type:'a', text: dataString}])
 
      setQuery('')
   }
@@ -70,6 +83,13 @@ function App() {
     }
     
   }
+
+
+  useEffect(()=>{
+    // console.log(selectHistory);
+    askQuery()
+    
+  },[selectHistory])
   
 
 
@@ -78,12 +98,12 @@ function App() {
   return (
   <div className='grid grid-cols-5 h-screen text-center'>
       
-    <div className='col-span-1 bg-pink-950  h-full text-center '>
-      <h2 className='font-semibold italic  text-yellow-300 pb-4 text-3xl'>CHAT HISTOR <button onClick={deleteHistory}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M600-240v-80h160v80H600Zm0-320v-80h280v80H600Zm0 160v-80h240v80H600ZM120-640H80v-80h160v-60h160v60h160v80h-40v360q0 33-23.5 56.5T440-200H200q-33 0-56.5-23.5T120-280v-360Zm80 0v360h240v-360H200Zm0 0v360-360Z"/></svg></button></h2>
+    <div className='col-span-1 bg-gradient-to-r from-pink-950 to-black-900 h-full text-center '>
+      <h2 className='font-semibold italic  text-yellow-400 pb-4 '>CHAT HISTORY <button onClick={deleteHistory}><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M600-240v-80h160v80H600Zm0-320v-80h280v80H600Zm0 160v-80h240v80H600ZM120-640H80v-80h160v-60h160v60h160v80h-40v360q0 33-23.5 56.5T440-200H200q-33 0-56.5-23.5T120-280v-360Zm80 0v360h240v-360H200Zm0 0v360-360Z"/></svg></button></h2>
       <ul className='overflow-auto pr-3 pl-4'>
         {
           chatHistory && chatHistory.map((i)=>(
-          <li className='text-white pb-2 m-auto flex justify-start truncate cursor-pointer hover:bg-stone-900'> * {i} </li>))
+          <li onClick={()=>setSelectHistory(i)} className='text-gray-300 italic pb-2 m-auto flex justify-start truncate cursor-pointer hover:bg-stone-900'> ☆ {i} </li>))
         }
       </ul>
       
@@ -118,7 +138,7 @@ function App() {
        
         </div>
 
-      <div className='bg-lime-950 w-3xl m-auto max-w-80 rounded-3xl border border-l-white text-white flex' >
+      <div className='bg-gradient-to-r from-lime-950 to-black w-3xl m-auto max-w-80 rounded-3xl border border-l-white text-white flex' >
         <input type="text" value={Query}
         onKeyDown={doneEnter}
          onChange={(e)=>setQuery(e.target.value)} className='w-full h-full p-3 outline-none' placeholder='Ask me Anything' />
