@@ -40,7 +40,7 @@ function App() {
 
     const payload = {
 
-    "contents": [{"parts":[{"text": `${Query}` }]}]  //you are an expert in "Machine learning" & "Deep Learning" and you give reference of any one Machine learning topic whenever someone asks you a question or says something. so answer ${data} and give reference to atleast one machinelearning or deep learning topic which is relatable to this question`
+    "contents": [{"parts":[{"text": `you are an expert in "Machine learning" & "Deep Learning" and you give reference of any one Machine learning topic whenever someone asks you a question or says something. so answer ${data} and give reference to atleast one machinelearning or deep learning topic which is relatable to this question` }]}]  //answer it and also provide isnight into some particular 'Machine learning' topic which is relatable to the query, throughout your answer subtly. also keep in mind it should be some particular topic, but dont write that you've been asked to provide machine learning reference
   }
 
 
