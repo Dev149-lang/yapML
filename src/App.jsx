@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import { link } from './components/keys'
 import Result from './components/Result'
@@ -12,6 +12,7 @@ function App() {
    const [chatHistory,setHistory] = useState(JSON.parse(localStorage.getItem('history')) )
 
    const[selectHistory, setSelectHistory] = useState('')
+   const scrollDown = useRef();
   
   
 
@@ -39,7 +40,7 @@ function App() {
 
     const payload = {
 
-    "contents": [{"parts":[{"text": `${data}`}]}]  //answer it and also provide isnight into some particular 'Machine learning' topic which is relatable to the query, throughout your answer subtly. also keep in mind it should be some particular topic, but dont write that you've been asked to provide machine learning reference
+    "contents": [{"parts":[{"text": `${Query}` }]}]  //you are an expert in "Machine learning" & "Deep Learning" and you give reference of any one Machine learning topic whenever someone asks you a question or says something. so answer ${data} and give reference to atleast one machinelearning or deep learning topic which is relatable to this question`
   }
 
 
@@ -66,6 +67,10 @@ function App() {
      setResponsive([...Responsive, {type: 'q', text: Query?Query:selectHistory}, {type:'a', text: dataString}])
 
      setQuery('')
+
+     setTimeout(() => {
+      scrollDown.current.scrollTop = scrollDown.current.scrollHeight;
+     }, 800);
   }
 
   // console.log(Responsive);
@@ -111,7 +116,7 @@ function App() {
 
     
     <div className='col-span-4 '>
-      <div className='container overflow-x-auto h-150 m-auto' > 
+      <div ref={scrollDown} className='container overflow-x-auto h-150 m-auto' > 
         <div className='text-white'>
           <ul>
           {
@@ -138,7 +143,7 @@ function App() {
        
         </div>
 
-      <div className='bg-gradient-to-r from-lime-950 to-black w-3xl m-auto max-w-80 rounded-3xl border border-l-white text-white flex' >
+      <div className='mt-6 bg-gradient-to-r from-lime-950 to-black w-3xl m-auto max-w-80 rounded-3xl border border-l-white text-white flex' >
         <input type="text" value={Query}
         onKeyDown={doneEnter}
          onChange={(e)=>setQuery(e.target.value)} className='w-full h-full p-3 outline-none' placeholder='Ask me Anything' />

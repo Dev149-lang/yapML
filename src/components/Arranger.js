@@ -4,3 +4,4 @@ export function arrange(str){
 export function afterArrange(str){
         return  str.replace(/^(\*)(\*)|(\*)$/g, '')
 }
+

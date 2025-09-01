@@ -17,7 +17,7 @@ const Result = ({result, index})=> {
         
         if( arrange(result)){
             setLine(true);
-            setResult(afterArrange(resu))
+            setResult(afterArrange(result))
         }
         
     },[])
