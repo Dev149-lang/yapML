@@ -2,14 +2,14 @@
 import { useState } from 'react'
 import './App.css'
 import { link } from './components/keys'
-import Result from './components/result'
+import Result from './components/Result'
 
 function App() {
   
   const [Query,setQuery] = useState('')
    const [Responsive, setResponsive] = useState([])
 
-   const [chatHistory,setHistory] = useState([])
+   const [chatHistory,setHistory] = useState(JSON.parse(localStorage.getItem('history')) )
   
   const payload = {
 
