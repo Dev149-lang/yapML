@@ -109,7 +109,9 @@ function App() {
 
 
   return (
-  <div className='overflow-hidden w-full  h-screen text-center'>
+  <div className='overflow-hidden w-full  h-screen text-center' >
+    
+    
     <div className='text-centre text-red-800 font-bold p-5 m-auto '>yapML</div>
       <button 
         onClick={toggleHistory}
