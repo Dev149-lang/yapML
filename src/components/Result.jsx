@@ -29,7 +29,7 @@ const Result = ({result, index})=> {
        <>
             
             {/* {result} */}
-            {line?<span className=" text-gray-200 pt-4.5 block italic text-lg">{resu}</span> : <span className=" pt-0 pb-1 text-sm">{resu}</span>} 
+            {line?<span className=" text-gray-200 pt-4.5 block italic font-bold text-lg">{resu}</span> : <span className=" pt-0 pb-1 text-sm">{resu}</span>} 
          </> 
     )
 }
