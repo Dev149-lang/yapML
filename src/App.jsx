@@ -42,7 +42,7 @@ function App() {
 
     const payload = {
 
-    "contents": [{"parts":[{"text": `you are an expert in "Machine learning" & "Deep Learning" and you give reference of any one Machine learning topic whenever someone asks you a question or says something. so answer ${data} and give reference to atleast one machinelearning or deep learning topic which is relatable to this question` }]}]  //answer it and also provide isnight into some particular 'Machine learning' topic which is relatable to the query, throughout your answer subtly. also keep in mind it should be some particular topic, but dont write that you've been asked to provide machine learning reference
+    "contents": [{"parts":[{"text": `you are an expert in "Machine learning" & "Deep Learning" and you give information about any one Machine learning topic whenever someone asks you a question or says something. so answer ${data} and sneak in a reference to atleast one machinelearning or deep learning topic which is relatable to this question.` }]}]  //answer it and also provide isnight into some particular 'Machine learning' topic which is relatable to the query, throughout your answer subtly. also keep in mind it should be some particular topic, but dont write that you've been asked to provide machine learning reference
   }
 
 
@@ -109,7 +109,14 @@ function App() {
 
 
   return (
-  <div className='overflow-hidden w-full  h-screen text-center' >
+  <div className='overflow-hidden w-full  h-screen text-center'  style={{
+      backgroundImage: `
+        repeating-linear-gradient(0deg, transparent, transparent 5px, rgba(99, 102, 241, 0.15) 5px, rgba(99, 102, 241, 0.15) 6px, transparent 6px, transparent 15px),
+        repeating-linear-gradient(90deg, transparent, transparent 5px, rgba(99, 102, 241, 0.15) 5px, rgba(99, 102, 241, 0.15) 6px, transparent 6px, transparent 15px),
+        repeating-linear-gradient(0deg, transparent, transparent 10px, rgba(139, 92, 246, 0.12) 10px, rgba(139, 92, 246, 0.12) 11px, transparent 11px, transparent 30px),
+        repeating-linear-gradient(90deg, transparent, transparent 10px, rgba(139, 92, 246, 0.12) 10px, rgba(139, 92, 246, 0.12) 11px, transparent 11px, transparent 30px)
+      `,
+    }} >
     
     
     <div className='text-centre text-red-800 font-bold p-5 m-auto '>yapML</div>
