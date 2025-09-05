@@ -167,7 +167,7 @@ function App() {
        
         </div>
 
-      <div className='mt-6 bg-gradient-to-r from-lime-950 to-black w-3xl m-auto max-w-80 rounded-3xl border border-l-white text-white flex' >
+      <div className='  bg-gradient-to-r from-lime-950 to-black w-3xl m-auto max-w-80 rounded-3xl border border-l-white text-white flex' >
         <input type="text" value={Query}
         onKeyDown={doneEnter}
          onChange={(e)=>setQuery(e.target.value)} className='w-full h-full p-3 outline-none' placeholder='Ask me Anything' />
